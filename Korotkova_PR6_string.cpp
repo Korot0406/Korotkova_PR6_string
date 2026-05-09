@@ -226,14 +226,75 @@ void problem4(){
 // разделителями между словами, причём слова могут разделяться более чем одним пробелом, в начале и конце строки пробелы также допускаются.
 // Удалить все слова, длина которых равна заданному числу k (k вводится с клавиатуры), сохраняя пробелы до и после слов.
 // Вывести преобразованную строку.
-void problem5(){}
+void problem5(){
+    char s[1000];
+    EnterArrChar("Введите строку: ", s, 1000);
+    int len = strlen(s);
+    int k = IntEnterNumber("Введите длину слов, которые будут удаляться: ");
+    char copy_s[1000];
+    int j = 0;
+
+    int i = 0;
+    while (i < len){
+        while (s[i] = ' '){
+            copy_s[j++] = s[i++];
+        }
+
+        int start = i;
+        int word_len = 0;
+
+        while (s[i] != ' '){
+            ++i;
+            ++word_len;
+        }
+
+        if (word_len > 0){
+            if (word_len != k){
+                for (int j1 = start; j1 < start + word_len; j1++){
+                    copy_s[j++] = s[j1];
+                }
+            }
+        }
+    }
+    
+    copy_s[j] = '\0';
+    strcpy(s, copy_s);
+    cout << s;
+
+}
 
 // Задание 6. Вводится строка символов, которые разделены на слова. Пробелы являются
-// разделителями между словами.В первом слове отсортировать символы по возрастанию
-// ASCII - кодов.Вывести преобразованную строку.
+// разделителями между словами. В первом слове отсортировать символы по возрастанию
+// ASCII - кодов. Вывести преобразованную строку.
 void problem6(){
-    string s = EnterString("Введите строку символов: ");
+    string s = EnterString("Введите строку: ");
+    if (s[0] == ' '){
+        s = EnterString("Введите строку: ");
+    }
 
+    string correct_str;
+    int len_word = 0;
+
+    if (s.find(' ') != string::npos){
+        len_word = s.find(' ');
+    }else{
+        len_word = size(s);
+    }
+
+    correct_str = s.substr(0, len_word);
+
+    for (int i = 0; i < len_word - 1; i++){
+        for (int j = 0; j < len_word - i - 1; j++){
+            if (correct_str[j] > correct_str[j + 1]){
+                char x = correct_str[j];
+                correct_str[j] = correct_str[j + 1];
+                correct_str[j + 1] = x;
+            }
+        }
+    }
+
+    s.replace(0, len_word, correct_str);
+    cout << "Преобразованная строка: " << s << "\n";
 
 }
 
