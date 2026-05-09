@@ -104,7 +104,7 @@ void problem1(){
     EnterArrChar("Введите строку текста: ", s, 1000);
     char number[] = "0123456789";
     char letters[] = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
-    char mas[1000] = {'0'};
+    int count = 0;
     
     int len = 0;
     char* p = s;
@@ -115,6 +115,7 @@ void problem1(){
     }
 
     p = s;
+    cout << "Результат задания:\n";
     for (int i = 0; i <= len; i++){
         int k = 0;
         for (int j1 = 0; j1 < 53; j1++){
@@ -131,15 +132,15 @@ void problem1(){
             }
         }
         
-        if (*(p + i) == ' ') k++;
+        if (*(p + i) == ' ')++k;
 
         if (k == 0){
+            ++count;
             cout << "Символы, не являющиеся буквами и цифрами:\n" << *(p + i) << "\n" ;
-            mas[i] = *(p + i);
         }
     }
 
-    if (mas[0] == '0'){
+    if (count == 0){
         cout << "-1\n";
     }
 }
